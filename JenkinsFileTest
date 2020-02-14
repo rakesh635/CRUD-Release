@@ -67,7 +67,7 @@ pipeline {
 		
 		
 		
-		stage('XLDeploy Publish') {  
+		/* stage('XLDeploy Publish') {  
 		agent { label 'master' }
 			when {
 				not {
@@ -81,6 +81,9 @@ pipeline {
 				xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
 			}
 		}
+		
+		*/
+		
 		/*stage('Request to Pull Changes') {
 			when {
 					branch 'dev'

@@ -29,10 +29,10 @@ pipeline {
 			agent { label 'master' }
 			when {
 				not {
-					anyOf { 
+					
 						branch 'Re*' 
 						branch 'master'
-					}
+			
 				}
 			}
 			steps {
@@ -46,10 +46,10 @@ pipeline {
 		agent { label 'master' }
 			when {
 				not {
-					anyOf { 
+					
 						branch 'Re*' 
 						branch 'master'
-					}
+					
 				}
 			}
 			steps {

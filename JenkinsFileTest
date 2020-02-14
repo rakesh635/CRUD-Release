@@ -22,10 +22,10 @@ pipeline {
 						
 						cleanWs()
 						checkout scm
-						 pom = readMavenPom file: "pom.xml";
-						 pom.version;
+						 //pom = readMavenPom file: "pom.xml";
+						 //pom.version;
 						 //def POM_VERSION = "${pom.version}";
-		                                 echo "version ${pom.version}";
+		                                 //echo "version ${pom.version}";
 						
 						sh "ls"
 						sh "pwd"
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
 		     pom = readMavenPom file: "pom.xml";
-		     POM_VERSION = ${pom.version};
+		     POM_VERSION = "${pom.version}";
 		     
                     if (env.BRANCH_NAME == 'master' | env.BRANCH_NAME == 'PR*' ) {
                        sh "sed -i 's/{{PACKAGE_VERSION}}/$BUILD_NUMBER/g' deployit-manifest.xml"

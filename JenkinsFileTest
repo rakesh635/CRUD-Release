@@ -188,8 +188,8 @@ pipeline {
 					sh "git tag -a ${releasedVersion} -m 'CRUD-${releasedVersion}'"
 					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git ${releasedVersion}"
 				}
-			}
-		}  */
+			}  */
+		}  
 		stage('Sanity Test') {
 			when {
 				anyOf { branch 'Re*' 

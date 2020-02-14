@@ -1,8 +1,8 @@
 pipeline {
     agent { label 'master' }
     options { skipDefaultCheckout() }
-     /* stages {
-		stage('Unit Test') {
+      stages {
+		/* stage('Unit Test') {
 				steps {
 						echo 'Clean Build'
 						cleanWs()

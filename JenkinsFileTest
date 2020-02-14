@@ -23,7 +23,8 @@ pipeline {
 						cleanWs()
 						checkout scm
 						 pom = readMavenPom file: "pom.xml";
-						 def POM_VERSION = "${pom.version}";
+						 pom.version;
+						 //def POM_VERSION = "${pom.version}";
 		                                 echo "version ${pom.version}";
 						
 						sh "ls"

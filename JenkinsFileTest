@@ -26,7 +26,7 @@ pipeline {
 				}
 		}	
 		
-		stage("XLDeploy Package1") {
+		stage("XLDeploy Package") {
 			agent { label 'master' }
             steps {
                 script {
@@ -39,7 +39,7 @@ pipeline {
                     } else {
                        sh "sed -i 's/{{PACKAGE_VERSION}}/$pom.version/g' deployit-manifest.xml"
 				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
-				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${pom.version}.dar"
+				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
                     }
                 }
             }
@@ -79,7 +79,7 @@ pipeline {
                                xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
                        } else {
 		       
-                             xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.dar"
+                             xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
                        }
 				
 	             }			

@@ -67,22 +67,26 @@ pipeline {
 		
 		
 		
-		/* stage('XLDeploy Publish') {  
+		 stage('XLDeploy Publish') {  
 		agent { label 'master' }
-			when {
-				not {
-					
-						branch 'Re*' 
-						branch 'master'
-					
-				}
-			}
+
 			steps {
-				xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
-			}
-		}
+			
+			script {
+			 pom = readMavenPom file: "pom.xml";
+			 if (env.BRANCH_NAME == 'master' | env.BRANCH_NAME == 'PR*' ) {
+			 
+                               xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
+                       } else {
+		       
+                             xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.dar"
+                       }
+				
+	             }			
+		 }
+              }
 		
-		*/
+		
 		
 		/*stage('Request to Pull Changes') {
 			when {

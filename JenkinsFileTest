@@ -185,12 +185,13 @@ pipeline {
 					sh "git checkout -b Release-${releasedVersion}"
 					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git Release-${releasedVersion}"
 					*/
+					/*
 					sh "git tag -a ${releasedVersion} -m 'CRUD-${releasedVersion}'"
 					sh "git push https://tonysandeep:Qwerty0420@github.com/tonysandeep/trunk_release.git ${releasedVersion}"
 				}
-			}  */
-		}  
-		stage('Sanity Test') {
+			}  
+		}  */
+	/*	stage('Sanity Test') {
 			when {
 				anyOf { branch 'Re*' 
 					branch 'master'
@@ -214,7 +215,9 @@ pipeline {
 				}
 			}
 		}
-        /*		stage("Create RELEASE Package") {
+         */       
+		  
+	  /*	  stage("Create RELEASE Package") {
 			when {
 				anyOf { branch 'Re*' 
 					branch 'master'

@@ -24,8 +24,30 @@ pipeline {
 						//sh "mvn clean package -DskipTests"
 						sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"				 
 				}
-		}				
-		stage("XLDeploy Package") {
+		}	
+		
+		stage("XLDeploy Package1") {
+			agent { label 'master' }
+            steps {
+                script {
+		     pom = readMavenPom file: "pom.xml";
+		     
+                    if (env.BRANCH_NAME == 'master' | env.BRANCH_NAME == 'PR*' ) {
+                       sh "sed -i 's/{{PACKAGE_VERSION}}/$BUILD_NUMBER/g' deployit-manifest.xml"
+				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
+				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${BUILD_NUMBER}.0.dar"
+                    } else {
+                       sh "sed -i 's/{{PACKAGE_VERSION}}/$pom.version/g' deployit-manifest.xml"
+				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
+				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${pom.version}.0.dar"
+                    }
+                }
+            }
+             }
+		
+		
+		
+		/*stage("XLDeploy Package") {
 			agent { label 'master' }
 			when {
 				not {
@@ -41,7 +63,10 @@ pipeline {
 				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${BUILD_NUMBER}.0.dar"
 			
 			}
-		}
+		} */
+		
+		
+		
 		stage('XLDeploy Publish') {  
 		agent { label 'master' }
 			when {

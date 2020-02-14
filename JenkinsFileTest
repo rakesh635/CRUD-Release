@@ -18,6 +18,9 @@ pipeline {
 			agent { label 'master' }
 				steps {
 						echo 'Clean Build'
+						
+						 pom = readMavenPom file: "pom.xml";
+		                                 pom.version;
 						cleanWs()
 						checkout scm
 						sh "ls"

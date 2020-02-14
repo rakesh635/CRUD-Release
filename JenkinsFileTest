@@ -19,10 +19,13 @@ pipeline {
 				steps {
 						echo 'Clean Build'
 						
-						 pom = readMavenPom file: "pom.xml";
-		                                 pom.version;
+						
 						cleanWs()
 						checkout scm
+						 pom = readMavenPom file: "pom.xml";
+						 def POM_VERSION = "${pom.version}";
+		                                 echo "version ${pom.version}";
+						
 						sh "ls"
 						sh "pwd"
 						//sh "mvn clean package -DskipTests"

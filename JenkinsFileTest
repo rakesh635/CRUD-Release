@@ -21,6 +21,7 @@ pipeline {
 				   script {
 		                          pom = readMavenPom file: "pom.xml";
 		                          POM_VERSION = "${pom.version}";
+					   echo "********************************* POM_VERSION: ${pom.version}*******"
 						echo 'Clean Build'
 						
 						

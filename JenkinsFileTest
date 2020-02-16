@@ -37,7 +37,7 @@ pipeline {
 						   POM_VERSION = "${pom.version}";
 						   //sh 'echo POM_VERSION = $pom.version > /tmp/pomversion1.txt'
 						  // sh 'echo version := 1.0.$BUILD_ID >> build.sbt'
-						 sh 'echo  POM_VERSION = $POM_VERSION >> pomversion.txt'
+						 sh 'echo  POM_VERSION = "$POM_VERSION" >> pomversion.txt'
 						 
 						 echo "******************* $POM_VERSION*********"
 						

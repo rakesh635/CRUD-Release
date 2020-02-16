@@ -36,7 +36,7 @@ pipeline {
 						   pom = readMavenPom file: "pom.xml";
 						   POM_VERSION = "${pom.version}";
 						   //sh 'echo POM_VERSION = $pom.version > /tmp/pomversion1.txt'
-						 echo  POM_VERSION = "${pom.version}" > /tmp/pomversion1.txt
+						 echo  POM_VERSION = "${pom.version}" > pomversion1.txt
 						 
 						 echo "******************* $POM_VERSION*********"
 						

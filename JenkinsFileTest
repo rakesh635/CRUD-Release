@@ -22,10 +22,7 @@ pipeline {
 		                         
 						cleanWs()
 						checkout scm
-						 //pom = readMavenPom file: "pom.xml";
-						 //pom.version;
-						 //def POM_VERSION = "${pom.version}";
-		                                 //echo "version ${pom.version}";
+						
 						
 						sh "ls"
 						sh "pwd"
@@ -35,11 +32,8 @@ pipeline {
 						
 						   pom = readMavenPom file: "pom.xml";
 						   env.POMVERSION = pom.version
-						   //sh 'echo POM_VERSION = $pom.version > /tmp/pomversion1.txt'
-						  sh 'echo version := 1.0.$BUILD_ID >> build.sbt'
-						 sh 'echo  VERSION = $POMVERSION >> pomversion122.txt'
-						 
-						 echo "******************* $POMVERSION*********"
+						   sh 'echo  VERSION = $POMVERSION >> /tmp/pomversion.txt'
+						   echo "******************* $POMVERSION*********"
 						
 						}
 				}

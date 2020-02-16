@@ -34,12 +34,12 @@ pipeline {
 						//sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"				 
 						
 						   pom = readMavenPom file: "pom.xml";
-						   //POM_VERSION = "${pom.version}";
+						   POMVERSION = "${pom.version}";
 						   //sh 'echo POM_VERSION = $pom.version > /tmp/pomversion1.txt'
-						  // sh 'echo version := 1.0.$BUILD_ID >> build.sbt'
-						 sh 'echo  POM_VERSION = $pom.version >> pomversion12.txt'
+						  sh 'echo version := 1.0.$BUILD_ID >> build.sbt'
+						 sh 'echo  POM_VERSION = $POMVERSION >> pomversion122.txt'
 						 
-						 echo "******************* $pom.version*********"
+						 echo "******************* $POMVERSION*********"
 						
 						}
 				}

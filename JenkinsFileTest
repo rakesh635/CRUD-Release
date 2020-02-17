@@ -32,7 +32,7 @@ pipeline {
 						
 						   pom = readMavenPom file: "pom.xml";
 						   env.POMVERSION = pom.version
-						   sh 'echo  VERSION=$POMVERSION >> /tmp/pomversion.txt'
+						   sh 'echo  VERSION=$POMVERSION.$BUILD_NUMBER >> /tmp/pomversion.$BUILD_NUMBER.txt'
 						   echo "******************* $POMVERSION*********"
 						
 						}
@@ -53,7 +53,7 @@ pipeline {
                     } else {
                        sh "sed -i 's/{{PACKAGE_VERSION}}/$pom.version.$BUILD_NUMBER/g' deployit-manifest.xml"
 				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
-				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${pom.version}.1.${BUILD_NUMBER}.dar"
+				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
                     }
                 }
             }
@@ -93,7 +93,7 @@ pipeline {
                                xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
                        } else {
 		       
-                             xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.1.${BUILD_NUMBER}.dar"
+                             xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
                        }
 				
 	             }			
